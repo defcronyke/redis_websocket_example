@@ -1,0 +1,9 @@
+#msg_box {
+    border: 1px silver solid;
+    width: 500px;
+    height: 500px;
+}
+
+input[name="msg"] {
+    width: 430px;
+}
