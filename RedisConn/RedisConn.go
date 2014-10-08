@@ -1,7 +1,6 @@
 package RedisConn
 
 import(
-//	"fmt"
 	"log"
 	"gopkg.in/redis.v2"
 )
@@ -22,7 +21,7 @@ func NewRedisConn(url, channel string) *redisConn {
 	return r
 }
 
-func (r redisConn) ConnectToRedis(url string) *redis.Client {
+func (r *redisConn) ConnectToRedis(url string) *redis.Client {
 	log.Printf("Connecting to: %v\n", url)
 	client := redis.NewTCPClient(&redis.Options{
 		Addr: url,
@@ -31,7 +30,7 @@ func (r redisConn) ConnectToRedis(url string) *redis.Client {
 	return client
 }
 
-func (r redisConn) Subscribe(client *redis.Client, channel string) *redis.PubSub {
+func (r *redisConn) Subscribe(client *redis.Client, channel string) *redis.PubSub {
 	sub := client.PubSub()
 	err := sub.Subscribe(channel)
 	if err != nil {
@@ -43,7 +42,7 @@ func (r redisConn) Subscribe(client *redis.Client, channel string) *redis.PubSub
 	return sub
 }
 
-func (r redisConn) ListenToSubscription(redis_handler RedisHandlerT) {
+func (r *redisConn) ListenToSubscription(redis_handler RedisHandlerT) {
 	go func(subscriber *redis.PubSub) { // listen for messages in a goroutine
 		for {
 			msg, err := subscriber.Receive()

@@ -16,7 +16,7 @@ $(function() {  // main()
     };
     
     ws.onmessage = function(evt) {
-        var recieved_msg = evt.data;
+        var received_msg = evt.data;
         console.log("WebSocket msg received: " + received_msg);
     };
     

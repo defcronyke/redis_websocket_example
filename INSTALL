@@ -1,3 +1,16 @@
+Supported Platforms:
+Linux 64-bit
+
 Dependencies:
-go get gopkg.in/redis.v2
-go get github.com/gorilla/websocket
+    Go
+    Redis
+    go get gopkg.in/redis.v2
+    go get github.com/gorilla/websocket
+
+To use:
+    run from the project root: go build
+    then run: ./redis_websocket_example
+    in a web browser, browse to: http://localhost:8080
+    open the web console
+    open redis-cli and push a message to all websocket clients
+    by publishing to mychannel: publish mychannel "hello all!"

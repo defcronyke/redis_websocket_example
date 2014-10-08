@@ -1,10 +1,6 @@
 package main
 
 import (
-//	"fmt"
-//	"log"
-//	"gopkg.in/redis.v2"
-//	"time"
 	"./RedisConn"
 	"./WebSocketConn"
 	"./Handlers"
@@ -22,12 +18,4 @@ func main() {
 	
 	r_conn.ListenToSubscription(handlers.RedisHandlerDefault)	// Listen for redis messages.
 	ws_conn.Serve("localhost:8080", handlers.WebSocketHandlerDefault)	// Listen for websocket messages.
-	
-/*  // Uncomment this if only using redis, and not the web server.
-	for {
-		time.Sleep(10 * time.Second)
-		pub := r_conn.RedisClient.Publish("mychannel", "hello after 10 seconds")
-		_ = pub
-	}
-*/
 }
