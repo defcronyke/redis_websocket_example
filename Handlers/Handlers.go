@@ -78,6 +78,10 @@ func (h *handlers) WebSocketHandlerDefault(res http.ResponseWriter, req *http.Re
 				return
 			}
 			log.Printf("Incoming WebSocket msg: %v", string(msg_bytes))
+			for id, websocket_client := range h.WebSocketClients {
+				_ = id
+				go websocket_client.WriteMessage(websocket.TextMessage, msg_bytes)
+			}
 		}
 	}(ws_id)
 }

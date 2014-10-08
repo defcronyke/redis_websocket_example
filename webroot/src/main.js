@@ -16,21 +16,24 @@ $(function() {  // main()
     };
     
     ws.onmessage = function(evt) {
-        var received_msg = evt.data;
-        console.log("WebSocket msg received: " + received_msg);
+        var msg = evt.data;
+        console.log("WebSocket msg received: " + msg);
+        msg = $("<div/>").html(msg).text(); // Strip out html tags.
+        $("#msg_box").append('<span class="msg">' + msg + '</span>'); // Add msg to msg box.
     };
     
     ws.onclose = function() {
         console.log("WebSocket connection closed.");
     };
     
-    $("#msg_box_form").submit(function(evt) {
+    $("#msg_box_form").submit(function(evt) {   // On send new message.
         var msg = $(this).find('[name=msg]').val();
+        msg = $("<div/>").html(msg).text(); // Strip out html tags.
+        if (!msg) return false; // Return if msg box is empty.
+        ws.send(msg);   // Send the message over websocket.
+        console.log("WebSocket msg sent: "+ msg);
         
-        if (!msg) return false;
-        
-        ws.send(msg);
-        console.log("Sent msg: "+ msg);
+        $("[name=msg]").val(''); // Clear new msg input box.
         return false;
     });
 });

@@ -4,6 +4,12 @@
     height: 500px;
 }
 
+/* The messages in the msg box. */
+span.msg {
+    display: block;
+}
+
+/* The new message input box. */
 input[name="msg"] {
     width: 430px;
 }
